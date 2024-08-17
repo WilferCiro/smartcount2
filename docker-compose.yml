@@ -1,0 +1,53 @@
+version: '3.8'
+services:
+  shell:
+    build:
+      context: .
+      dockerfile: .docker
+      args:
+        APP_NAME: 'shell'
+    container_name: shell
+    volumes:
+      - nodemodules:/usr/src/app/node_modules
+    networks:
+      - internal
+      - app
+    labels:
+      - "module.federation.location.proxy.name=shell"
+      - "module.federation.location.proxy.path=shell"
+      - "module.federation.location.proxy.server=shell"
+      - "module.federation.location.proxy.base=shell"
+    environment:
+      - VIRTUAL_HOST=module
+
+  gateway:
+    image: nginx:1.24.0-alpine
+    volumes:
+      - /tmp/nginx:/etc/nginx/conf.d
+    container_name: mf-gateway-develop
+    networks:
+      - internal
+      - app
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${PROJECT_NAME}-gateway.rule=Host(`${DOMAIN_NAME}`)"
+      - "traefik.docker.network=app"
+
+  docker-gen:
+    image: jwilder/docker-gen
+    container_name: docker-gen-develop
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - .docker/mf/nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro
+      - /tmp/nginx:/etc/nginx/conf.d
+    command: -notify-sighup mf-gateway-develop -watch -only-exposed -wait 5s:30s /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
+
+volumes:
+  nodemodules: { }
+
+networks:
+  app:
+    external: true
+    name: app
+  internal:
+    name: ${PROJECT_NAME}

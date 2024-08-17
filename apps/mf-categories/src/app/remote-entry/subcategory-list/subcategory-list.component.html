@@ -1,0 +1,99 @@
+<div class="page-header">
+  <div class="add-item d-flex">
+    <div class="page-title">
+      <h4 class="h3">Lista de subcategorías </h4>
+      <h6>Edita las subcategorías</h6>
+    </div>
+  </div>
+  <ul class="table-top-head">
+    <li><a><img src="assets/img/icons/pdf.svg" alt="img"></a></li>
+    <li><a><img src="assets/img/icons/excel.svg" alt="img"></a></li>
+    <li><a><i class="feather icon-printer feather-rotate-ccw"></i></a></li>
+    <li><a><i class="feather icon-rotate-ccw feather-rotate-ccw"></i></a></li>
+  </ul>
+</div>
+
+<div class="card table-list-card">
+  <div class="card-body">
+    <div class="table-top mb-0">
+      <div class="add-item d-flex flex-column">
+        <a class="btn btn-secondary mb-3" [routerLink]="routes.addSubcategory"><i class="bi bi-plus-lg"></i> Agregar Subcategoría</a>
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">Categorías</li>
+            <li class="breadcrumb-item">Bebidas</li>
+            <li class="breadcrumb-item active" aria-current="page">Jugos Naturales</li>
+          </ol>
+        </nav>
+      </div>
+      <div class="search-path d-flex">
+        <div class="dropdown">
+          <a class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Estado <i class="bi bi-list"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Activo</a></li>
+            <li><a class="dropdown-item" href="#">Inactivo</a></li>
+          </ul>
+        </div>
+        <div class="input-group ms-2">
+          <input type="search" placeholder="Buscar..." class="form-control">
+          <button class="btn btn-dark"><i class="bi bi-search"></i> Buscar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive product-list">
+    <table class="table datanew">
+      <thead>
+        <tr>
+          <th>Orden</th>
+          <th>Imagen</th>
+          <th>Nombre</th>
+          <th>Precio Venta</th>
+          <th>Precio Domicilio</th>
+          <th>Descripción</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><img alt="category"></td>
+          <td>Jugos Agua</td>
+          <td><i class="bi bi-currency-dollar"></i></td>
+          <td><i class="bi bi-currency-dollar"></i></td>
+          <td></td>
+          <td>Activo</td>
+          <td>
+            <div class="btn-group">
+              <a class="btn btn-info">Subcategorias</a>
+              <a class="btn btn-secondary">Editar</a>
+              <a class="btn btn-warning">Inactivar</a>
+              <a class="btn btn-danger">Eliminar</a>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><img alt="category"></td>
+          <td>Jugos Leche</td>
+          <td><i class="bi bi-currency-dollar"></i></td>
+          <td><i class="bi bi-currency-dollar"></i></td>
+          <td></td>
+          <td>Activo</td>
+          <td>
+            <div class="btn-group">
+              <a class="btn btn-info">Subcategorias</a>
+              <a class="btn btn-secondary">Editar</a>
+              <a class="btn btn-success">Activar</a>
+              <a class="btn btn-danger">Eliminar</a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+{
+  "data": [
+    {
+      "settingsName": "Employee Benefits",
+      "description": "Employee Vehicle",
+      "isSelected": false
+      
+    },
+    {
+      "settingsName": "Foods & Snacks",
+      "description": "Employee Foods",
+      "isSelected": false
+    },
+    {
+      "settingsName": "Entertainment",
+      "description": "Employee Welfare",
+      "isSelected": false
+    },
+    {
+      "settingsName": "Office Expenses & Postage",
+      "description": "Postal Expense",
+      "isSelected": false
+    },
+    {
+      "settingsName": "Other Expenses",
+      "description": "Other Expenses",
+      "isSelected": false
+    },
+    {
+      "settingsName": "Petrol",
+      "description": "Employee Cab",
+      "isSelected": false
+    },
+    {
+      "settingsName": "Maintenance",
+      "description": "Office Maintenance",
+      "isSelected": false
+    },
+    {
+      "settingsName": "Marketing",
+      "description": "Advertising Cost",
+      "isSelected": false
+    },
+    {
+      "settingsName": "Printing & Stationery",
+      "description": "Stationery Expense",
+      "isSelected": false
+    },
+    {
+      "settingsName": "Telephone Expense",
+      "description": "Telephone Cost",
+      "isSelected": false
+    }
+
+  ],
+  "totalData": 10
+}

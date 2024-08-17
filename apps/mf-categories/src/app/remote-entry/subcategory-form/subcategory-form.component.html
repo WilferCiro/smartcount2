@@ -1,0 +1,76 @@
+<div class="page-header">
+  <div class="add-item d-flex">
+    <div class="page-title">
+      <h4 class="page-title" *ngIf="!isEdit"> {{ 'Crear SubCategoría'}} </h4>
+      <h4 class="page-title" *ngIf="isEdit"> {{ 'Editar SubCategoría'}} </h4>
+    </div>
+  </div>
+</div>
+
+<div class="card table-list-card">
+  <div class="card-body">
+
+    <form action="" [formGroup]="formGroup" (submit)="onSubmit()">
+      <div class="mb-4">
+        <label class="form-label">Categoría:</label>
+        <span class="btn btn-lg mx-2 badge bg-warning" [hidden]="showSelect">{{ parentCategory?.cateName }}</span>
+        <button type="button" class="btn btn-info" (click)="showSelectCategory()" [hidden]="showSelect">
+          Seleccionar otra subcategoría
+        </button>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Nombre:</label>
+        <input type="text" class="form-control" formControlName="cateName" placeholder="Nombre">
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Precio Venta:</label>
+        <input type="text" class="form-control" formControlName="cateSalePrice" placeholder="Precio Venta">
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Precio Domicilios:</label>
+        <input type="text" class="form-control" formControlName="cateDeliveryPrice" placeholder="Precio Domicilios">
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Imagen:</label>
+        <input type="file" class="form-control">
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Color:</label>
+        <div class="input-group">
+          <ngx-colors ngx-colors-trigger></ngx-colors>
+          <mat-form-field>
+            <input class="form-control" formControlName="cateColor" matInput>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Estado:</label>
+        <select name="" class="form-select" formControlName="cateState" id="">
+          <option value="true" selected>Activo</option>
+          <option value="false">Inactivo</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Descripción:</label>
+        <textarea class="form-control" formControlName="cateDescription" placeholder="Descripción"></textarea>
+      </div>
+
+      <div class="d-flex text-center" id="action-form">
+        <button class="btn btn-warning" type="submit">
+          Guardar
+        </button>
+        <button class="btn btn-dark" type="button" routerLink="/categories/subcategories">
+          Cancelar
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>

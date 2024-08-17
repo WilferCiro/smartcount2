@@ -1,0 +1,107 @@
+<div class="page-header">
+  <div class="add-item d-flex">
+    <div class="page-title">
+      <h4 class="page-title" *ngIf="!isEdit"> {{ 'Crear nueva categoría'}} </h4>
+      <h4 class="page-title" *ngIf="isEdit"> {{ 'Editar categoría'}} </h4>
+    </div>
+  </div>
+  <ul class="table-top-head">
+    <li>
+      <a data-bs-toggle="tooltip" data-bs-placement="top" matTooltip="Pdf" matTooltipPosition="above"><img
+        src="assets/img/icons/pdf.svg" alt="img"></a>
+    </li>
+    <li>
+      <a data-bs-toggle="tooltip" data-bs-placement="top" matTooltip="Excel" matTooltipPosition="above"><img
+        src="assets/img/icons/excel.svg" alt="img"></a>
+    </li>
+    <li>
+      <a data-bs-toggle="tooltip" data-bs-placement="top" matTooltip="Print" matTooltipPosition="above"><i
+        class="feather icon-printer feather-rotate-ccw"></i></a>
+    </li>
+    <li>
+      <a data-bs-toggle="tooltip" data-bs-placement="top" matTooltip="Refresh" matTooltipPosition="above"><i
+        class="feather icon-rotate-ccw feather-rotate-ccw"></i></a>
+    </li>
+  </ul>
+</div>
+
+<div class="card table-list-card">
+  <div class="card-body">
+
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <div class="mb-4">
+        <label class="form-label">Nombre</label>
+        <div class="input-group">
+          <span class="input-group-text">
+            <i class="bi bi-info"></i>
+          </span>
+          <input type="text" class="form-control" formControlName="cateName" placeholder="¿Cuál es el nombre de la nueva categoría?" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Precio Venta</label>
+        <div class="input-group">
+          <span class="input-group-text">
+            <i class="bi bi-currency-dollar"></i>
+          </span>
+          <input type="text" class="form-control" formControlName="cateSalePrice" placeholder="¿Cuál es el precio por categoría?">
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Precio Domicilio</label>
+        <div class="input-group">
+          <span class="input-group-text">
+            <i class="bi bi-currency-dollar"></i>
+          </span>
+          <input type="text" class="form-control" formControlName="cateDeliveryPrice" placeholder="¿Cuál es el costo de envío por categoría?">
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Color <i class="bi bi-palette-fill"></i></label>
+        <div class="input-group">
+          <ngx-colors ngx-colors-trigger></ngx-colors>
+          <mat-form-field>
+            <input class="form-control"  formControlName="cateColor" matInput >
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Estado</label>
+        <div class="input-group">
+          <span class="input-group-text">
+            <i class="bi bi-list-ul"></i>
+          </span>
+          <select name="" class="form-select" formControlName="cateState" id="">
+            <option value="Active" selected>Activo</option>
+            <option value="Inactive">Inactivo</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Imagen<i class="bi bi-image"></i></label>
+        <input type="file" class="form-control">
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Descripción<i class="bi bi-body-text"></i></label>
+        <textarea class="form-control" formControlName="cateDescription"></textarea>
+      </div>
+
+      <div class="d-flex text-center" id="action-form">
+        <button class="btn btn-warning" type="submit">
+          <i class="bi bi-floppy"></i> Guardar
+        </button>
+
+        <button class="btn btn-dark" type="submit" [routerLink]="routes.categoryList">
+          <i class="bi bi-x-lg"></i> Cancelar
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>

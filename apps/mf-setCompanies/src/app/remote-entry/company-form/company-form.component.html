@@ -1,0 +1,483 @@
+<div class="page-header">
+  <div class="add-item d-flex">
+    <div class="page-title">
+      <h4 class="page-title">Configurar empresa</h4>
+    </div>
+  </div>
+</div>
+<!-- /add -->
+<form>
+  <div class="card">
+    <div class="card-body add-product">
+      <div class="card-body">
+        <div class="accordion accordion-card-one" id="accordionInfoSolidExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header addproduct-icon" id="headingInfoSolid-1">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseInfoSolid-1" aria-expanded="true" aria-controls="collapseInfoSolid-1">
+                Información básica
+              </button>
+            </h2>
+            <div class="row p-4 accordion-collapse collapse show" aria-labelledby="headingInfoSolid-1"
+              data-bs-parent="#accordionInfoSolidExample" id="collapseInfoSolid-1">
+              <div class="col-lg-4 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Nombre de la compañía</label>
+                  <input type="text" class="form-control" id="validation1" required>
+                </div>
+              </div>
+              <div class="col-lg-4 col-sm-12 col-12">
+                <div class="form-group summer-description-box transfer mb-3">
+                  <label class="form-label">Descripción</label>
+                  <div id="summernote3"></div>
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-4 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Tipo de Empresa</label>
+                  <mat-select id="company_type" name="company_type" class="select" placeholder="Seleccionar">
+                    <mat-option *ngFor="let type of companyTypes" [value]="type.code">
+                      {{ type.label }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+              <div class="col-lg-4 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Sucursal de la compañía</label>
+                  <input type="text" class="form-control" required>
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Estado de la Compañía</label>
+                  <mat-select id="company_status" name="company_status" class="select" placeholder="Seleccionar">
+                    <mat-option *ngFor="let status of statuses" [value]="status.value">
+                      {{ status.label }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">URL de la Compañía</label>
+                  <input type="url" formControlName="companyUrl" class="form-control" placeholder="https://">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header addproduct-icon" id="headingInfoSolid-2">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseInfoSolid-2" aria-expanded="true" aria-controls="collapseInfoSolid-2">
+                Ubicación de la empresa
+              </button>
+            </h2>
+            <div class="row p-4 accordion-collapse collapse show" aria-labelledby="headingInfoSolid-2"
+              data-bs-parent="#accordionInfoSolidExample" id="collapseInfoSolid-2">
+              <div class="col-lg-3 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">País</label>
+                  <mat-select class="select" placeholder="Seleccionar">
+                    <mat-option *ngFor="let country of countries" [value]="country.value">
+                      {{ country.label }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Departamento/Estado:</label>
+                  <mat-select class="select" placeholder="Seleccionar">
+                    <mat-option *ngFor="let state of states" [value]="state.value">
+                      {{ state.label }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+              <div class="col-lg-3 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Ciudad:</label>
+                  <mat-select class="select" placeholder="Seleccionar">
+                    <mat-option *ngFor="let city of cities" [value]="city.value">
+                      {{ city.label }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+              <div class="col-lg-3 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Divisa:</label>
+                  <mat-select class="select" placeholder="Seleccionar">
+                    <mat-option *ngFor="let currency of currencies" [value]="currency.value">
+                      {{ currency.label }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header addproduct-icon" id="headingInfoSolid-3">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseInfoSolid-3" aria-expanded="true" aria-controls="collapseInfoSolid-3">
+                Información tributaria
+              </button>
+            </h2>
+            <div class="row p-4 accordion-collapse collapse show" aria-labelledby="headingInfoSolid-3"
+              data-bs-parent="#accordionInfoSolidExample" id="collapseInfoSolid-3">
+              <div class="col-lg-3 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Tipo de Tercero</label>
+                  <mat-select id="third_type" name="third_type" class="select" placeholder="Seleccionar" required>
+                    <mat-option *ngFor="let type of thirdTypes" [value]="type.value">
+                      {{ type.label }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Responsabilidad Tributaria</label>
+                  <mat-select id="tax_responsibility" name="tax_responsibility" class="select"
+                    placeholder="Seleccionar">
+                    <mat-option *ngFor="let responsibility of taxResponsibilities" [value]="responsibility.code">
+                      {{ responsibility.label }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Tipo de Identificación</label>
+                  <mat-select id="identification_type" name="identification_type" class="select"
+                    placeholder="Seleccionar" required>
+                    <mat-option *ngFor="let idType of identificationTypes" [value]="idType.value">
+                      {{ idType.label }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-sm-12 col-12">
+                <div class="mb-3">
+                  <label class="form-label">Email
+                    address</label>
+                  <input type="email" class="form-control" id="exampleDropdownFormEmail1"
+                    placeholder="email@example.com">
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Estado de la Compañía</label>
+                  <mat-select class="select" placeholder="Seleccionar">
+                    <mat-option *ngFor="let status of statuses" [value]="status.value">
+                      {{ status.label }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header addproduct-icon" id="headingInfoSolid-4">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseInfoSolid-4" aria-expanded="true" aria-controls="collapseInfoSolid-4">
+                Configuración de la compañía
+              </button>
+            </h2>
+            <div class="row p-4 accordion-collapse collapse show" aria-labelledby="headingInfoSolid-4"
+              data-bs-parent="#accordionInfoSolidExample" id="collapseInfoSolid-4">
+              <div class="col-lg-3 col-sm-12 col-12 accordion-body">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Tipo de Inventario</label>
+                  <mat-select id="inventory_type" name="inventory_type" class="select" placeholder="Seleccionar">
+                    <mat-option *ngFor="let type of inventoryTypes" [value]="type.code">
+                      {{ type.label }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+              <div class="col-lg-3 col-sm-12 col-12 accordion-body">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Manejo de Ajuste Fiscal</label>
+                  <mat-select id="fiscal_adjustment" name="fiscal_adjustment" class="select" placeholder="Seleccionar">
+                    <mat-option *ngFor="let adjustment of yesNoOptions" [value]="adjustment.code">
+                      {{ adjustment.label }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-sm-12 col-12 accordion-body">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Manejo de Cierres Mensuales</label>
+                  <mat-select id="monthly_closures" name="monthly_closures" class="select" placeholder="Seleccionar">
+                    <mat-option *ngFor="let closure of yesNoOptions" [value]="closure.code">
+                      {{ closure.label }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-sm-12 col-12 accordion-body">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Manejo de Copropiedades</label>
+                  <mat-select id="co_property_management" name="co_property_management" class="select"
+                    placeholder="Seleccionar">
+                    <mat-option *ngFor="let management of yesNoOptions" [value]="management.code">
+                      {{ management.label }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header addproduct-icon" id="headingInfoSolid-4">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseInfoSolid-5" aria-expanded="true" aria-controls="collapseInfoSolid-5">
+                Pagos
+              </button>
+            </h2>
+            <div class="row p-4 accordion-collapse collapse show" aria-labelledby="headingInfoSolid-4"
+              data-bs-parent="#accordionInfoSolidExample" id="collapseInfoSolid-5">
+              <div class="col-lg-3 col-sm-12 col-12 accordion-body">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Tipo de pago</label>
+                  <mat-select [(ngModel)]="selectedPaymentMethod" (selectionChange)="onPaymentMethodChange($event)" placeholder="Seleccionar">
+                    <mat-option *ngFor="let method of paymentMethods" [value]="method.code">
+                      {{ method.label }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+          
+              <div class="col-lg-3 col-sm-12 col-12 accordion-body" *ngIf="availableBanks.length > 0">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Banco</label>
+                  <mat-select placeholder="Seleccionar">
+                    <mat-option *ngFor="let bank of availableBanks" [value]="bank">
+                      {{ bank }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header addproduct-icon" id="headingInfoSolid-6">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseInfoSolid-6" aria-expanded="true" aria-controls="collapseInfoSolid-6">
+                Configuración de cuenta contable
+              </button>
+            </h2>
+            <div class="row p-4 accordion-collapse collapse show" aria-labelledby="headingInfoSolid-6"
+              data-bs-parent="#accordionInfoSolidExample" id="collapseInfoSolid-6">
+              
+              <div class="col-lg-3 col-sm-12 col-12 accordion-body">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Tipo de Cuenta</label>
+                  <mat-select class="select" placeholder="Seleccionar">
+                    <mat-option *ngFor="let tipo of tipoCuentaOptions" [value]="tipo.code">
+                      {{ tipo.label }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+          
+              <div class="col-lg-3 col-sm-12 col-12 accordion-body">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Nivel</label>
+                  <input type="number" class="form-control" placeholder="Ingrese el nivel">
+                </div>
+              </div>
+          
+              <div class="col-lg-3 col-sm-12 col-12 accordion-body">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Tipo de Nivel</label>
+                  <mat-select class="select" placeholder="Seleccionar">
+                    <mat-option *ngFor="let tipoNivel of tipoNivelOptions" [value]="tipoNivel.code">
+                      {{ tipoNivel.label }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+          
+              <div class="col-lg-3 col-sm-12 col-12 accordion-body">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Código PUC</label>
+                  <input type="text" class="form-control" placeholder="Ingrese el código PUC">
+                </div>
+              </div>
+          
+              <div class="col-lg-3 col-sm-12 col-12 accordion-body">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Nombre del PUC</label>
+                  <input type="text" class="form-control" placeholder="Ingrese el nombre del PUC">
+                </div>
+              </div>
+          
+              <div class="col-lg-3 col-sm-12 col-12 accordion-body">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Abreviación</label>
+                  <input type="text" class="form-control" placeholder="Ingrese la abreviación">
+                </div>
+              </div>
+          
+              <div class="col-lg-3 col-sm-12 col-12 accordion-body">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Estado</label>
+                  <mat-select class="select" placeholder="Seleccionar">
+                    <mat-option *ngFor="let estado of statuses" [value]="estado.value">
+                      {{ estado.label }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+          
+              <div class="col-lg-3 col-sm-12 col-12 accordion-body">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Control de Terceros</label>
+                  <mat-select class="select" placeholder="Seleccionar">
+                    <mat-option *ngFor="let control of controlTercerosOptions" [value]="control.code">
+                      {{ control.label }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header addproduct-icon" id="headingInfoSolid-7">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseInfoSolid-7" aria-expanded="true" aria-controls="collapseInfoSolid-7">
+                Contrato
+              </button>
+            </h2>
+            <div class="row p-4 accordion-collapse collapse show" aria-labelledby="headingInfoSolid-7"
+              data-bs-parent="#accordionInfoSolidExample" id="collapseInfoSolid-7">
+              
+              <div class="col-lg-4 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Fecha de Creación</label>
+                  <input type="date" class="form-control">
+                </div>
+              </div>
+              
+              <div class="col-lg-4 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">NIT</label>
+                  <input type="text" class="form-control" placeholder="Ingrese el NIT">
+                </div>
+              </div>
+              
+              <div class="col-lg-4 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Nombre del Contratante</label>
+                  <input type="text" class="form-control" placeholder="Ingrese el nombre del contratante">
+                </div>
+              </div>
+              
+              <div class="col-lg-4 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Nombre de la Sucursal</label>
+                  <input type="text" class="form-control" placeholder="Ingrese el nombre de la sucursal">
+                </div>
+              </div>
+              
+              <div class="col-lg-4 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Dirección</label>
+                  <input type="text" class="form-control" placeholder="Ingrese la dirección">
+                </div>
+              </div>
+              
+              <div class="col-lg-4 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Teléfono</label>
+                  <input type="tel" class="form-control" placeholder="Ingrese el teléfono">
+                </div>
+              </div>
+              
+              <div class="col-lg-4 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Celular</label>
+                  <input type="tel" class="form-control" placeholder="Ingrese el celular">
+                </div>
+              </div>
+              
+              <div class="col-lg-4 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Correo Electrónico</label>
+                  <input type="email" class="form-control" placeholder="email@ejemplo.com">
+                </div>
+              </div>
+              
+              <div class="col-lg-4 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Fecha de Inicio</label>
+                  <input type="date" class="form-control">
+                </div>
+              </div>
+              
+              <div class="col-lg-4 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Fecha de Finalización</label>
+                  <input type="date" class="form-control">
+                </div>
+              </div>
+              
+              <div class="col-lg-4 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Valor del Contrato</label>
+                  <input type="number" class="form-control" placeholder="Ingrese el valor del contrato">
+                </div>
+              </div>
+              
+              <div class="col-lg-4 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Descuento</label>
+                  <input type="number" class="form-control" placeholder="Ingrese el descuento">
+                </div>
+              </div>
+              
+              <div class="col-lg-4 col-sm-12 col-12">
+                <div class="mb-3 add-product">
+                  <label class="form-label">Estado del Contrato</label>
+                  <mat-select id="contStatus" name="contStatus" class="select" placeholder="Seleccionar">
+                    <mat-option *ngFor="let status of statuses" [value]="status.value">
+                      {{ status.label }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          
+        </div>
+
+
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <input type="submit" value="Agregar Compañía" class="btn btn-primary">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</form>

@@ -1,0 +1,760 @@
+<div class="page-header">
+  <div class="add-item d-flex">
+    <div class="page-title">
+      <h4 class="page-title" *ngIf="!isEdit"> {{ 'Crear nuevo producto'}} </h4>
+      <h4 class="page-title" *ngIf="isEdit"> {{ 'Editar producto'}} </h4>
+    </div>
+  </div>
+  <ul class="table-top-head">
+    <li>
+      <div class="page-btn">
+        <a [routerLink]="routes.productList" class="btn btn-secondary">
+          <i-feather name="arrow-left" class="feather icon-arrow-left me-2"></i-feather>Volver</a>
+      </div>
+    </li>
+    <li>
+      <a (click)="toggleCollapse()" data-bs-toggle="tooltip" data-bs-placement="top" title="Collapse"
+        id="collapse-header" matTooltip="Collapse"> @if (!isCollapsed) {
+        <i-feather name="chevron-up" class="feather icon-chevron-up feather-chevron-up"></i-feather>
+        }
+        @if (isCollapsed) {
+        <i-feather name="chevron-down" class="feather icon-chevron-down feather-chevron-down"></i-feather>
+        }</a>
+    </li>
+  </ul>
+</div>
+<!-- /add -->
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <div class="card mb-0">
+    <div class="card-body add-product pb-0">
+      <div class="accordion-card-one accordion" id="accordionExample">
+        <div class="accordion-item">
+          <div class="accordion-header" id="headingOne">
+            <div class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-controls="collapseOne">
+              <div class="addproduct-icon">
+                <h5>
+                  <i-feather name="info" class="feather icon-info add-info"></i-feather>
+                  <span>Información del producto</span>
+                </h5>
+                <a>
+                  <i-feather name="chevron-down" class="feather icon-chevron-down chevron-down-add"></i-feather>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col-lg-4 col-sm-12 col-12">
+                  <div class="mb-3 add-product">
+                    <label class="form-label">Nombre</label>
+                    <input type="text" formControlName="prodName" class="form-control" id="validation1" required (keyup)="checkInputValidity()">
+                  </div>
+                </div>
+                <div class="col-lg-4 col-sm-12 col-12">
+                  <div class="form-group summer-description-box transfer mb-3">
+                    <label class="form-label">Descripción</label>
+                    <div id="summernote3"></div>
+                    <input type="text" formControlName="prodDescription" class="form-control">
+                  </div>
+                </div>
+                <div class="col-lg-4 col-sm-12 col-12">
+                  <div class="input-blocks add-product list">
+                    <label class="form-label">SKU</label>
+                    <input type="text" formControlName="prodCode" class="form-control list" placeholder="Ingresa el SKU">
+                    <button type="button" class="btn btn-primaryadd" (click)="generateSKU()">
+                      Generar código
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="addservice-info">
+                <div class="row" *ngFor="let categoryRow of categoryRows; let i = index">
+                  <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="mb-3 add-product">
+                      <div class="add-newplus">
+                        <label class="form-label">Categoría</label>
+                        <a data-bs-toggle="modal" data-bs-target="#add-units-category" (click)="showSubcategorySelect(i)">
+                          <i-feather name="plus-circle" class="feather icon-plus-circle plus-down-add"></i-feather>
+                          <span>Subcategoría</span>
+                        </a>
+                      </div>
+                      <mat-select formControlName="idCategory" class="select" placeholder="Seleccionar" *ngIf="categories.length > 0">
+                        <mat-option *ngFor="let category of categories" [value]="category.idCategory">
+                          {{ category.cateName }}
+                        </mat-option>
+                      </mat-select>
+                      <p *ngIf="categories.length === 0">Cargando categorías...</p>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-sm-6 col-12 mt-4" *ngIf="!categoryRow.showSubcategorySelect">
+                    <div class="col-lg-12 col-sm-12 col-12">
+                      <button class="btn btn-success add-category-btn" *ngIf="i === categoryRows.length - 1" (click)="addNewCategoryRow()">
+                        <i-feather name="plus" class="feather icon-plus feather-plus"></i-feather>
+                      </button>
+                      <button class="btn btn-danger remove-category-btn" *ngIf="i > 0" (click)="removeCategoryRow(i)">
+                        <i-feather name="trash" class="feather icon-trash-2 feather-trash-2"></i-feather>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-lg-8 col-sm-6 col-12" *ngIf="categoryRow.showSubcategorySelect">
+                    <div class="row">
+                      <div class="col-6 mb-3 add-product">
+                        <label class="form-label">Sub Categoría</label>
+                        <mat-select class="select" placeholder="Seleccionar">
+                          <mat-option *ngFor="let option of filteredSubcategoryList" [value]="option">
+                            {{ option }}
+                          </mat-option>
+                        </mat-select>
+                      </div>
+                      <div class="col-1 mt-4">
+                        <button class="btn btn-success add-category-btn" *ngIf="i === categoryRows.length - 1" (click)="addNewCategoryRow()">
+                          <i-feather name="plus" class="feather icon-plus feather-plus"></i-feather>
+                        </button>
+                      </div>
+                      <div class="col-1 mt-4">
+                        <button class="btn btn-danger remove-category-btn" *ngIf="i > 0" (click)="removeCategoryRow(i)">
+                          <i-feather name="trash" class="feather icon-trash-2 feather-trash-2"></i-feather>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4 col-sm-6 col-12">
+                  <div class="input-blocks add-products">
+                    <label class="d-block">Con ingredientes</label>
+                    <div class="single-pill-product">
+                      <mat-select formControlName="prodIsRawMaterial" class="select" placeholder="Seleccionar"  [(value)]="hasIngredients">
+                        <mat-option value="yes">Si</mat-option>
+                        <mat-option value="no">No</mat-option>
+                      </mat-select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="hasIngredients === 'yes'"  class="tab-content" id="ingredients-tabContent">
+                <div class="tab-pane fade show active" id="ingredients-home" role="tabpanel" aria-labelledby="ingredients-home-tab">
+                  <div class="text-editor add-list add">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="text-center">
+                          <label class="form-label">Ingredientes para elaborar {{ ingredientsText }}</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-2 col-sm-2 col-2"></div>
+                      <div class="col-lg-4 col-sm-4 col-12">
+                        <div class="form-group add-product list">
+                          <label class="form-label">Producto</label>
+                          <input type="text" class="form-control list">
+                        </div>
+                      </div>
+                      <div class="col-lg-4 col-sm-4 col-12">
+                        <div class="input-blocks add-product list">
+                          <label class="form-label">Cantidad</label>
+                          <input type="text" class="form-control list">
+                          <button type="button" class="btn btn-primaryadd">Agregar</button>
+                        </div>
+                      </div>
+                      <div class="row justify-content-center">
+                        <div class="col-lg-6 col-md-8 col-sm-10 col-12">
+                          <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 p-1">
+                              <span style="flex-basis: 45%;" class="item-list-product">Nombre del producto 1</span>
+                              <span style="flex-basis: 45%;" class="item-list-product">2.5</span>
+                              <button type="button" class="btn btn-danger btn-remove btn-sm">X</button>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 p-1">
+                              <span style="flex-basis: 45%;" class="item-list-product">Nombre del producto 2</span>
+                              <span style="flex-basis: 45%;" class="item-list-product">1</span>
+                              <button type="button" class="btn btn-danger btn-remove btn-sm">X</button>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 p-1">
+                              <span style="flex-basis: 45%;" class="item-list-product">Nombre del producto 3</span>
+                              <span style="flex-basis: 45%;" class="item-list-product">1.5</span>
+                              <button type="button" class="btn btn-danger btn-remove btn-sm">X</button>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>  
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane fade show active" id="ingredients-profile" role="tabpanel" aria-labelledby="ingredients-profile-tab"></div>
+              </div>
+              <div *ngIf="hasIngredients === 'yes'" class="tab-content border" id="additions-tabContent">
+                <div class="tab-pane fade show active" id="additions-home" role="tabpanel" aria-labelledby="additions-home-tab">
+                  <div class="text-editor add-list add">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="text-center">
+                          <label class="form-label">Adicciones para  {{ ingredientsText }}</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mb-0">
+                      <div class="col-lg-2 col-sm-2 col-2"></div>
+                      <div class="col-lg-4 col-sm-4 col-12">
+                        <div class="form-group add-product list">
+                          <label class="form-label">Producto</label>
+                          <input type="text" class="form-control list" placeholder="Nombre del producto">
+                        </div>
+                      </div>
+                      <div class="col-lg-4 col-sm-4 col-12">
+                        <div class="input-blocks add-product list">
+                          <label class="form-label">Valor</label>
+                          <input type="text" class="form-control list" placeholder="Valor del producto">
+                          <button type="button" class="btn btn-primaryadd">Agregar</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row justify-content-center">
+                      <div class="col-lg-6 col-md-8 col-sm-10 col-12">
+                        <ul class="list-group">
+                          <li class="list-group-item d-flex justify-content-between align-items-center border-0 p-1">
+                            <span style="flex-basis: 45%;" class="item-list-product">CocaCola Persona</span>
+                            <span style="flex-basis: 45%;" class="item-list-product">$5.000</span>
+                            <button type="button" class="btn btn-danger btn-remove btn-sm">X</button>
+                          </li>
+                          <li class="list-group-item d-flex justify-content-between align-items-center border-0 p-1">
+                            <span style="flex-basis: 45%;" class="item-list-product">Salsa BBQ</span>
+                            <span style="flex-basis: 45%;" class="item-list-product">$2.000</span>
+                            <button type="button" class="btn btn-danger btn-remove btn-sm">X</button>
+                          </li>
+                          <li class="list-group-item d-flex justify-content-between align-items-center border-0 p-1">
+                            <span style="flex-basis: 45%;" class="item-list-product">Salsa BBQ</span>
+                            <span style="flex-basis: 45%;" class="item-list-product">$4.000</span>
+                            <button type="button" class="btn btn-danger btn-remove btn-sm">X</button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>                    
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4 col-sm-6 col-12">
+                  <div class="mb-3 add-product">
+                    <label class="form-label">Producto venta</label>
+                    <a data-bs-toggle="tooltip" data-bs-custom-class="tooltip-primary" class="text-primary" tooltip="Producto venta" placement="auto">
+                      <i-feather name="info" class="feather icon-info add-info mx-1"></i-feather>
+                    </a>
+                    <mat-select class="select" placeholder="Seleccionar">
+                      <mat-option value="yes">Si</mat-option>
+                      <mat-option value="no">No</mat-option>
+                    </mat-select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4 col-sm-6 col-12">
+                  <div class="mb-3 add-product">
+                    <label class="form-label">Precio de venta</label>
+                    <input type="text" formControlName="prodCostPrice" class="form-control" (keydown)="preventNonNumericalInput($event)">
+                  </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 col-12">
+                  <div class="mb-3 add-product">
+                    <label class="form-label">Precio de compra</label>
+                    <input type="text" formControlName="prodBasePrice" class="form-control"
+                      (keydown)="preventNonNumericalInput($event)">
+                  </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 col-12">
+                  <div class="mb-3 add-product">
+                    <label class="form-label">Precio de domicilio</label>
+                    <input type="text" formControlName="prodAverageCost" class="form-control"
+                      (keydown)="preventNonNumericalInput($event)">
+                  </div>
+                </div>
+              </div>
+              <!-- CONTIENE MODIFICADORES -->
+              <div class="row">
+                <div class="col-lg-4 col-sm-6 col-12">
+                  <div class="input-blocks add-products">
+                    <label class="d-block">Contiene modificadores</label>
+                    <div class="single-pill-product">
+                      <mat-select class="select" placeholder="Seleccionar" [(value)]="hasModifiers">
+                        <mat-option value="yes">Si</mat-option>
+                        <mat-option value="no">No</mat-option>
+                      </mat-select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div *ngIf="hasModifiers === 'yes'" class="tab-content" id="modifiers-tabContent">
+                <div class="tab-pane fade show active" id="modifiers-home" role="tabpanel" aria-labelledby="modifiers-home-tab">
+                  <div class="text-editor add-list add">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="text-center">
+                          <label class="form-label">Modificadores del producto</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-3 col-sm-3 col-2"></div>
+                      <div class="col-lg-2 col-sm-12 col-12">
+                        <div class="mb-3 add-product">
+                          <div class="add-newplus">
+                            <label class="form-label">Tipo</label>
+                          </div>
+                          <mat-select class="select custom-mat-select" placeholder="Seleccionar" [(value)]="selectedValue1">
+                            <mat-option *ngFor="let data of selectedList1" [value]="data.value">{{data.value}}</mat-option>
+                          </mat-select>
+                        </div>
+                      </div>
+                      <div class="col-lg-2 col-sm-12 col-12">
+                        <div class="mb-3 add-product">
+                          <label class="form-label">Con costo</label>
+                          <mat-select class="select custom-mat-select" placeholder="Seleccionar" [(value)]="selectedValue2">
+                            <mat-option *ngFor="let data of selectedList2" [value]="data.value">{{data.value}}</mat-option>
+                          </mat-select>
+                        </div>
+                      </div>
+                      <div class="col-lg-2 col-sm-12 col-12">
+                        <div class="mb-3 add-product">
+                          <label class="form-label">Cantidad</label>
+                          <mat-select class="select custom-mat-select" placeholder="Seleccionar" [(value)]="selectedValue3">
+                            <mat-option *ngFor="let data of selectedList3" [value]="data.value">{{data.value}}</mat-option>
+                          </mat-select>
+                        </div>
+                      </div>
+                      <div *ngIf="selectedValue1 === 'Escoger varios'" class="row justify-content-center">
+                        <div class="col-lg-2 col-sm-12 col-12 d-flex justify-content-center">
+                          <div class="mb-3 add-product">
+                            <label class="form-label">Mínimo</label>
+                            <input type="number" class="form-control" placeholder="Minimo">
+                          </div>
+                        </div>
+                        <div class="col-lg-2 col-sm-12 col-12">
+                          <div class="mb-3 add-product">
+                            <label class="form-label">Máximo</label>
+                            <input type="number" class="form-control"placeholder="Maximo">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row justify-content-center">
+                      <div class="col-lg-12 col-sm-12 col-12 d-flex justify-content-center">
+                        <div class="mb-3 add-product" style="width: 50%;">
+                          <div class="input-group">
+                            <input
+                              type="text"
+                              class="form-control"
+                              placeholder="Buscar producto"
+                              aria-label="Buscar producto"
+                              aria-describedby="button-addon2"
+                              matInput
+                              [formControl]="productControl"
+                              [matAutocomplete]="auto"
+                            />
+                            <button class="btn btn-primary" id="button-addon2" (click)="addProduct()">Agregar</button>
+                          </div>
+                          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayProduct">
+                            <mat-option *ngFor="let product of filteredProducts | async" [value]="product">
+                              {{ product.prodName }}
+                            </mat-option>
+                          </mat-autocomplete>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- Contenido de la lista que se muestra solo después de agregar un producto -->
+                    <div *ngIf="isProductAdded" class="row justify-content-center">
+                      <div class="col-lg-6 col-md-8 col-sm-10 col-12">
+                        <ul class="list-group">
+                          <!-- Títulos de modificadores del producto -->
+                          <li class="list-group-item d-flex justify-content-between align-items-center border-0 p-1">
+                            <strong style="flex-basis: 45%; text-align: left;">Producto</strong>
+                            <strong style="flex-basis: 25%; text-align: left;">Valor</strong>
+                            <strong *ngIf="selectedValue2 === 'Si'" style="flex-basis: 5%; text-align: left;">Cobro</strong>
+                            <span style="flex-basis: 5%;"></span>
+                          </li>
+                          <!-- Elementos de la lista de modificadores del producto -->
+                          <li *ngFor="let selectedProduct of selectedProducts" class="list-group-item d-flex justify-content-between align-items-center border-0 p-1" >
+                            <span class="item-list-product" style="flex-basis: 45%;" class="item-list-product">{{ selectedProduct.prodName }}</span>
+                            <span style="flex-basis: 25%;" class="item-list-product">{{ selectedProduct.prodCostPrice }}</span>
+                            <div *ngIf="selectedValue2 === 'Si'" style="flex-basis: 5%;" class="item-list-product">
+                              <input type="checkbox">
+                            </div>
+                            <button type="button" class="btn btn-danger btn-remove btn-sm" (click)="removeProduct(selectedProduct)" > X </button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <!-- Termina contenido de modificadores de producto -->
+                  </div>
+                </div>
+              </div>
+              <!-- Termina todo de modificadores -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-card-one accordion" id="accordionExample2">
+        <div class="accordion-item">
+          <div class="accordion-header" id="headingTwo">
+            <div class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+              aria-controls="collapseTwo">
+              <div class="text-editor add-list">
+                <div class="addproduct-icon list icon">
+                  <h5><i class="feather icon-life-buoy add-info"></i><span>Impuestos</span></h5>
+                  <a><i-feather name="chevron-down" class="feather icon-chevron-down chevron-down-add"></i-feather></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo"
+            data-bs-parent="#accordionExample2">
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col-lg-4 col-sm-6 col-12">
+                  <div class="mb-3 add-product">
+                    <label class="form-label">Tipo de impuesto*</label>
+                    <mat-select 
+                      placeholder="Seleccionar">
+                      <mat-option *ngFor="let option of taxData" [value]="option.value">
+                        {{ option.value }}
+                      </mat-option>
+                    </mat-select>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 col-12">
+                  <div class="mb-3 add-product">
+                    <label class="form-label">Impuestos*</label>
+                    <mat-select class="select" placeholder="Seleccionar">
+                      <mat-option *ngFor="let option of filteredTaxList" [value]="option">
+                        {{ option }}
+                      </mat-option>
+                    </mat-select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-card-one accordion" id="accordionExample3">
+        <div class="accordion-item">
+          <div class="accordion-header" id="headingThree">
+            <div class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
+              aria-controls="collapseThree">
+              <div class="addproduct-icon list">
+                <h5><i class="feather icon-image add-info"></i><span>Información de inventario</span>
+                </h5>
+                <a><i-feather name="chevron-down" class="feather icon-chevron-down chevron-down-add"></i-feather></a>
+              </div>
+            </div>
+          </div>
+          <div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree"
+            data-bs-parent="#accordionExample3">
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col-lg-4 col-sm-6 col-12">
+                  <div class="mb-3 add-product">
+                    <label class="form-label">Afecta el inventario*</label>
+                    <mat-select formControlName="prodStatusAffectInventory" class="select" placeholder="Seleccionar">
+                      <mat-option value="yes">Si</mat-option>
+                      <mat-option value="no">No</mat-option>
+                    </mat-select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4 col-sm-6 col-12" [ngClass]="{'d-none': selectedValue1 === 'yes'}">
+                  <div class="mb-3 add-product">
+                    <label class="form-label">Stock Mínimo</label>
+                    <input type="number" class="form-control" (keydown)="preventNonNumericalInput($event)">
+                  </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 col-12" [ngClass]="{'d-none': selectedValue1 === 'yes'}">
+                  <div class="mb-3 add-product">
+                    <label class="form-label">Stock Máximo</label>
+                    <input type="number" class="form-control" (keydown)="preventNonNumericalInput($event)">
+                  </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 col-12">
+                  <div class="mb-3 add-product">
+                    <label class="form-label">Peso</label>
+                    <input type="number" class="form-control" (keydown)="preventNonNumericalInput($event)">
+                  </div>
+                </div>
+              </div>
+              <div class="text-editor add-list add">
+                <div class="col-lg-12">
+                  <div class="add-choosen">
+                    <div class="input-blocks">
+                      <div class="image-upload">
+                        <input type="file" (change)="onImageSelected($event)">
+                        <div class="image-uploads" (click)="triggerFileInput()">
+                          <i-feather name="plus" class="feather icon-plus-circle plus-down-add"></i-feather>
+                          <h4>Agregar</h4>
+                          <h4>imagen</h4>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngFor="let image of images; let i = index" class="phone-img">
+                      <img [src]="image" alt="image">
+                      <a (click)="removeImage(i)"><i-feather name="x" class="feather icon-x x-square-add remove-product"></i-feather></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-card-one accordion" id="accordionExample4">
+        <div class="accordion-item">
+          <div class="accordion-header" id="headingFour">
+            <div class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseFour"
+              aria-controls="collapseFour">
+              <div class="text-editor add-list">
+                <div class="addproduct-icon list">
+                  <h5><i class="feather icon-list add-info"></i><span>Otros</span></h5>
+                  <a><i-feather name="chevron-down" class="feather icon-chevron-down chevron-down-add"></i-feather></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="collapseFour" class="accordion-collapse collapse show" aria-labelledby="headingFour"
+            data-bs-parent="#accordionExample4">
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col-lg-4 col-sm-6 col-12">
+                  <div class="mb-3 add-product">
+                    <label class="form-label">Tiempo de preparación</label>
+                    <input type="number" class="form-control" placeholder="min">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4 col-sm-6 col-12">
+                  <div class="mb-3 add-product">
+                    <div class="add-newplus">
+                      <label class="form-label">Impresoras</label>
+                      <a data-bs-toggle="modal" data-bs-target="#add-units-printer">
+                        <i-feather name="plus-circle" class="feather icon-plus-circle plus-down-add"></i-feather>
+                        <span>Agregar</span></a>
+                    </div>
+                    <mat-select class="select" placeholder="Seleccionar">
+                      <mat-option *ngFor="let printer of printers" [value]="printer.idPrinter">{{ printer.prinName}}</mat-option>
+                    </mat-select>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 col-12">
+                  <div class="text-editor">
+                    <div class="custom-filed">
+                      <div class="input-block add-lists">
+                        <label class="form-label">Seleccionar</label>
+                        <label class="checkboxs" (click)="selectAllPrinters(initChecked)">
+                          <input type="checkbox" />
+                          <span class="checkmarks"></span>Todas</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4 col-sm-6 col-12">
+                  <div class="input-blocks add-products">
+                    <label class="d-block">Variación precio venta</label>
+                    <div class="single-pill-product">
+                      <mat-select class="select" placeholder="Seleccionar" [(value)]="hasPriceVariation">
+                        <mat-option value="yes">Si</mat-option>
+                        <mat-option value="no">No</mat-option>
+                      </mat-select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="hasPriceVariation === 'yes'" class="tab-content" id="variation-tabContent">
+                <div class="tab-pane fade show active" id="variation-home" role="tabpanel"
+                  aria-labelledby="variation-home-tab">
+                  <div class="text-editor add-list add">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="text-center">
+                          <label class="form-label">Variación precio venta por proveedor de domicilio</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-2 col-sm-2 col-2">
+                      </div>
+                      <div class="col-lg-4 col-sm-4 col-12">
+                        <div class="form-group add-product list">
+                          <label class="form-label">Proveedor</label>
+                          <input type="text" class="form-control list">
+                        </div>
+                      </div>
+                      <div class="col-lg-4 col-sm-4 col-12">
+                        <div class="input-blocks add-product list">
+                          <label class="form-label">Valor</label>
+                          <input type="text" class="form-control list">
+                          <button type="submit" class="btn btn-primaryadd">Agregar</button>
+                        </div>
+                      </div>
+                      <div class="col-lg-2 col-sm-2 col-2">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane fade show active" id="variation-profile" role="tabpanel"
+                  aria-labelledby="variation-profile-tab">
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-card-one accordion" id="accordionExample4">
+        <div class="accordion-item">
+          <div class="accordion-header" id="headingFive">
+            <div class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseFive"
+              aria-controls="collapseFive">
+              <div class="text-editor add-list">
+                <div class="addproduct-icon list">
+                  <h5><i class="feather icon-list add-info"></i><span>Estado de actividad</span></h5>
+                  <a><i-feather name="chevron-down" class="feather icon-chevron-down chevron-down-add"></i-feather></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="collapseFive" class="accordion-collapse collapse show" aria-labelledby="headingFive"
+            data-bs-parent="#accordionExample4">
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col-lg-4 col-sm-6 col-12">
+                  <div class="mb-3 add-product">
+                    <label class="form-label">Estado</label>
+                    <mat-select formControlName="prodStatus" class="select" placeholder="Seleccionar">
+                      <mat-option value="active">Activo</mat-option>
+                      <mat-option value="inactive">Inactivo</mat-option>
+                    </mat-select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="d-flex text-center btn-addproduct mb-4" id="action-form">
+        <button class="btn btn-warning" type="submit">
+          <i class="bi bi-floppy"></i> Guardar
+        </button>
+
+        <button class="btn btn-dark" type="submit" [routerLink]="routes.productList">
+          <i class="bi bi-x-lg"></i> Cancelar
+        </button>
+      </div>
+    </div>
+    <!-- /add -->
+  </div>
+</form>
+<!-- /Add Payroll -->
+
+<!-- MODALES -->
+
+<!-- Add Category -->
+<div class="modal fade" id="add-units-category">
+  <div class="modal-dialog modal-dialog-centered custom-modal-two">
+    <div class="modal-content">
+      <div class="page-wrapper-new p-0">
+        <div class="content">
+          <div class="modal-header border-0 custom-modal-header">
+            <div class="page-title">
+              <h4>Agregar nueva categoría</h4>
+            </div>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body custom-modal-body">
+            <div class="mb-3">
+              <label class="form-label">Nombre</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="modal-footer-btn">
+              <a class="btn btn-cancel me-2" data-bs-dismiss="modal">Cancelar</a>
+              <a class="btn btn-submit">Guardar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Add Category -->
+<!-- Add Taxes -->
+<div class="modal fade" id="add-units-taxes">
+  <div class="modal-dialog modal-dialog-centered custom-modal-two">
+    <div class="modal-content">
+      <div class="page-wrapper-new p-0">
+        <div class="content">
+          <div class="modal-header border-0 custom-modal-header">
+            <div class="page-title">
+              <h4>Agregar nuevo impuesto</h4>
+            </div>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body custom-modal-body">
+            <div class="mb-3">
+              <label class="form-label">Porcentaje</label>
+              <input type="number" class="form-control">
+            </div>
+            <div class="modal-footer-btn">
+              <a class="btn btn-cancel me-2" data-bs-dismiss="modal">Cancelar</a>
+              <a class="btn btn-submit">Guardar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Add Taxes -->
+
+<!-- Add Printer -->
+<div class="modal fade" id="add-units-printer">
+  <div class="modal-dialog modal-dialog-centered custom-modal-two">
+    <div class="modal-content">
+      <div class="page-wrapper-new p-0">
+        <div class="content">
+          <div class="modal-header border-0 custom-modal-header">
+            <div class="page-title">
+              <h4>Agregar nueva impresora</h4>
+            </div>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body custom-modal-body">
+            <div class="mb-3">
+              <label class="form-label">Nombre</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="modal-footer-btn">
+              <a class="btn btn-cancel me-2" data-bs-dismiss="modal">Cancelar</a>
+              <a class="btn btn-submit">Guardar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Add Printer -->

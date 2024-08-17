@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  gateway-prod:
+    image: nginx:1.24.0-alpine
+    volumes:
+      - /tmp/nginx/${ENVIRONMENT}:/etc/nginx/conf.d
+    container_name: ${PROJECT_NAME}-gateway-${ENVIRONMENT}
+    networks:
+      - app
+      - internal
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${PROJECT_NAME}-gateway-${ENVIRONMENT}.rule=Host(`${DOMAIN_NAME}`)"
+      - "traefik.http.routers.${PROJECT_NAME}-gateway-${ENVIRONMENT}.entrypoints=https"
+      - "traefik.http.routers.${PROJECT_NAME}-gateway-${ENVIRONMENT}.tls=true"
+      - "traefik.http.routers.${PROJECT_NAME}-gateway-${ENVIRONMENT}.tls.certresolver=leresolver"
+      - "traefik.http.routers.${PROJECT_NAME}-gateway-${ENVIRONMENT}.middlewares=redirect-to-https@file"
+      - "traefik.docker.network=app"
+
+  docker-gen-prod:
+    image: jwilder/docker-gen
+    container_name: ${PROJECT_NAME}-gen-${ENVIRONMENT}
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro
+      - /tmp/nginx/${ENVIRONMENT}:/etc/nginx/conf.d
+    command: -notify-sighup ${PROJECT_NAME}-gateway-${ENVIRONMENT} -watch -only-exposed -wait 5s:30s /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
+    networks:
+      - internal
+
+networks:
+  app:
+    external: true
+    name: app
+  internal:
+    name: ${PROJECT_NAME}-${ENVIRONMENT}

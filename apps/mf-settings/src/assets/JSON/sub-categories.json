@@ -1,0 +1,145 @@
+{
+  "data": [
+    {
+      "image": "assets/img/products/product1.jpg",
+      "settings": "Computers",
+      "parentSettings": "Computers",
+      "settingsCode": "CT001",
+      "description": "Computers Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product2.jpg",
+      "settings": "Fruits",
+      "parentSettings": "Fruits",
+      "settingsCode": "CT002",
+      "description": "Fruits Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product3.jpg",
+      "settings": "Fruits",
+      "parentSettings": "Fruits",
+      "settingsCode": "CT003",
+      "description": "Fruits Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product4.jpg",
+      "settings": "Fruits",
+      "parentSettings": "Fruits",
+      "settingsCode": "CT004",
+      "description": "Fruits Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product5.jpg",
+      "settings": "Accessories",
+      "parentSettings": "Accessories",
+      "settingsCode": "CT005",
+      "description": "Accessories Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product6.jpg",
+      "settings": "Shoes",
+      "parentSettings": "Shoes",
+      "settingsCode": "CT006",
+      "description": "Shoes Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product7.jpg",
+      "settings": "Fruits",
+      "parentSettings": "Fruits",
+      "settingsCode": "CT007",
+      "description": "Fruits Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product7.jpg",
+      "settings": "Fruits",
+      "parentSettings": "Fruits",
+      "settingsCode": "CT008",
+      "description": "Fruits Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product8.jpg",
+      "settings": "Computers",
+      "parentSettings": "Computers",
+      "settingsCode": "CT009",
+      "description": "Computers Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product9.jpg",
+      "settings": "Health Care",
+      "parentSettings": "Health Care",
+      "settingsCode": "CT0010",
+      "description": "Health Care Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product9.jpg",
+      "settings": "Fruits",
+      "parentSettings": "Fruits",
+      "settingsCode": "CT004",
+      "description": "Fruits Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product10.jpg",
+      "settings": "Accessories",
+      "parentSettings": "Accessories",
+      "settingsCode": "CT005",
+      "description": "Accessories Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product11.jpg",
+      "settings": "Shoes",
+      "parentSettings": "Shoes",
+      "settingsCode": "CT006",
+      "description": "Shoes Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product12.jpg",
+      "settings": "Fruits",
+      "parentSettings": "Fruits",
+      "settingsCode": "CT007",
+      "description": "Fruits Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    }
+  ],
+  "totalData": 14
+}

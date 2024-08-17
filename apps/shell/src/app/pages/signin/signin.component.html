@@ -1,0 +1,90 @@
+<div class="account-content">
+  <div class="login-wrapper bg-img">
+    <div class="login-content">
+      <form [formGroup]="form">
+        <div class="login-userset">
+          <div class="login-logo logo-normal">
+            <img src="assets/img/logo.png" alt="img">
+          </div>
+          <a [routerLink] = "routes.adminDashboard" class="login-logo logo-white">
+            <img src="assets/img/logo-white.png"  alt="">
+          </a>
+          <div class="login-userheading">
+            <h3>{{ 'sign in' | translate | titlecase }}</h3>
+            <h4>Access the Dreamspos panel using your email and passcode.</h4>
+          </div>
+          <div class="form-login">
+            <label>{{ 'company' | translate | titlecase }}</label>
+            <div class="form-addons">
+              <input type="text" class="form-control" formControlName="company"/>
+            </div>
+          </div>
+          <div class="form-login">
+            <label>{{ 'username' | translate | titlecase }}</label>
+            <div class="form-addons">
+              <input type="text" class="form-control" formControlName="username">
+              <img src="assets/img/icons/mail.svg" alt="img">
+            </div>
+          </div>
+          <div class="form-login">
+            <label>{{ 'password' | translate | titlecase }}</label>
+            <div class="form-addons">
+              <input type="{{ password }}" class="form-control" formControlName="password" />
+              <img width="13px" height="10px" src="{{ !show ? 'assets/img/icons/eye.svg': 'assets/img/icons/eye-slash.svg' }}" alt="img" (click)="togglePassword()">
+            </div>
+          </div>
+          <div class="form-login authentication-check">
+            <div class="row">
+              <div class="col-6">
+                <div class="custom-control custom-checkbox custom-class-check">
+                  <label class="checkboxs ps-4 mb-0 pb-0 line-height-1">
+                    <input type="checkbox">
+                    <span class="checkmarks"></span>Remember me
+                  </label>
+                </div>
+              </div>
+              <div class="col-6 text-end">
+                <!-- <a class="forgot-link" [routerLink] = "routes.forgotPassword2">Forgot Password?</a> -->
+              </div>
+            </div>
+          </div>
+          <div class="form-login">
+            <button type="button" (click)="submit()" class="btn btn-login">{{ 'sign in' | translate | titlecase }}</button>
+          </div>
+          <div class="signinform">
+            <!-- <h4>New on our platform?<a [routerLink] = "routes.register2" class="hover-a"> Create an account</a></h4> -->
+          </div>
+          <div class="form-setlogin or-text">
+            <h4>OR</h4>
+          </div>
+          <div class="form-sociallink">
+            <ul class="d-flex">
+              <li>
+                <a href="javascript:void(0);" class="facebook-logo">
+                  <img src="assets/img/icons/facebook-logo.svg" alt="Facebook">
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0);">
+                  <img src="assets/img/icons/google.png" alt="Google">
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0);" class="apple-logo">
+                  <img src="assets/img/icons/apple-logo.svg" alt="Apple">
+                </a>
+              </li>
+
+            </ul>
+            <div class="my-4 d-flex justify-content-center align-items-center copyright-text">
+              <p>Copyright &copy; 2023 DreamsPOS. All rights reserved</p>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="login-img">
+      <img src="assets/img/authentication/login02.png" alt="img">
+    </div>
+  </div>
+</div>

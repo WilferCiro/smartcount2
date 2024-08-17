@@ -1,0 +1,49 @@
+server {
+    include mime.types;
+    types
+    {
+        application/javascript mjs;
+    }
+
+    listen       80;
+    listen  [::]:80;
+    server_name  localhost;
+
+    root   /usr/share/nginx/html;
+    index  index.html;
+
+{{ range $host, $containers := groupBy $ "Env.VIRTUAL_HOST" }}
+
+{{ range $index, $value := $containers }}
+
+{{ if index $value.Labels "module.federation.location.proxy.env" | eq "prod" }}
+
+{{ if index $value.Labels "module.federation.location.proxy.name" | eq "shell" }}
+
+    location / {
+        proxy_pass http://{{ index .Labels "module.federation.location.proxy.path" }}/;
+    }
+
+    location /shell/ {
+        proxy_pass http://{{ index .Labels "module.federation.location.proxy.path" }}/;
+    }
+
+{{ else }}
+
+    location /{{ index .Labels "module.federation.location.proxy.name" }}/ {
+        proxy_pass http://{{ index .Labels "module.federation.location.proxy.server" }}/;
+    }
+    location /shell/{{ index .Labels "module.federation.location.proxy.path" }}/ {
+        proxy_pass http://{{ index .Labels "module.federation.location.proxy.base" }}/$1;
+    }
+{{ end }}
+{{ end }}
+
+{{ end }}
+{{ end }}
+
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+}

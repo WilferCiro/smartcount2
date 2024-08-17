@@ -1,0 +1,145 @@
+{
+  "data": [
+    {
+      "image": "assets/img/products/product1.jpg",
+      "company": "Computers",
+      "parentCompany": "Computers",
+      "companyCode": "CT001",
+      "description": "Computers Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product2.jpg",
+      "company": "Fruits",
+      "parentCompany": "Fruits",
+      "companyCode": "CT002",
+      "description": "Fruits Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product3.jpg",
+      "company": "Fruits",
+      "parentCompany": "Fruits",
+      "companyCode": "CT003",
+      "description": "Fruits Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product4.jpg",
+      "company": "Fruits",
+      "parentCompany": "Fruits",
+      "companyCode": "CT004",
+      "description": "Fruits Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product5.jpg",
+      "company": "Accessories",
+      "parentCompany": "Accessories",
+      "companyCode": "CT005",
+      "description": "Accessories Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product6.jpg",
+      "company": "Shoes",
+      "parentCompany": "Shoes",
+      "companyCode": "CT006",
+      "description": "Shoes Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product7.jpg",
+      "company": "Fruits",
+      "parentCompany": "Fruits",
+      "companyCode": "CT007",
+      "description": "Fruits Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product7.jpg",
+      "company": "Fruits",
+      "parentCompany": "Fruits",
+      "companyCode": "CT008",
+      "description": "Fruits Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product8.jpg",
+      "company": "Computers",
+      "parentCompany": "Computers",
+      "companyCode": "CT009",
+      "description": "Computers Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product9.jpg",
+      "company": "Health Care",
+      "parentCompany": "Health Care",
+      "companyCode": "CT0010",
+      "description": "Health Care Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product9.jpg",
+      "company": "Fruits",
+      "parentCompany": "Fruits",
+      "companyCode": "CT004",
+      "description": "Fruits Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product10.jpg",
+      "company": "Accessories",
+      "parentCompany": "Accessories",
+      "companyCode": "CT005",
+      "description": "Accessories Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product11.jpg",
+      "company": "Shoes",
+      "parentCompany": "Shoes",
+      "companyCode": "CT006",
+      "description": "Shoes Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    },
+    {
+      "image": "assets/img/products/product12.jpg",
+      "company": "Fruits",
+      "parentCompany": "Fruits",
+      "companyCode": "CT007",
+      "description": "Fruits Description",
+      "createdBy": "Admin",
+      "isSelected": false,
+      "action": ""
+    }
+  ],
+  "totalData": 14
+}
