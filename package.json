@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve",
     "dev": "nx serve shell --devRemotes=mf-auth,mf-products,mf-categories,mf-setCompanies,mf-settings",
-    "build": "nx build",
+    "build": "nx build shell --prod --output-path=dist/apps/shell",
+    "start": "serve dist/apps/shell -l 4200",
     "test": "nx test"
   },
   "private": true,
