@@ -4,9 +4,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "nx serve shell --devRemotes=mf-auth,mf-products,mf-categories,mf-setCompanies,mf-settings",
-"build": "nx build shell --prod --outputPath=dist/apps/shell",
-"start": "nx serve shell --port 4200 --devRemotes=mf-auth,mf-products,mf-categories,mf-setCompanies,mf-settings",
-"test": "nx test shell"
+    "build": "nx build shell --prod --outputPath=dist/apps/shell",
+    "start": "nx serve shell --devRemotes=mf-auth,mf-products,mf-categories,mf-setCompanies,mf-settings",
+    "test": "nx test shell"
   },
   "private": true,
   "dependencies": {
